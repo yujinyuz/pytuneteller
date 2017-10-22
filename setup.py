@@ -30,7 +30,7 @@ test_requirements = [
 
 setup(
     name='pytuneteller',
-    version='0.1.2',
+    version='0.1.2beta1',
     description="A python horoscope fortune teller made for fun.",
     long_description=readme + '\n\n' + history,
     author="Eugene Essun Oliveros",
