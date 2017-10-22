@@ -26,10 +26,13 @@ Examples:
     pytuneteller horoscope pisces --yesterday
 """
 
+
 import json
 import logging
+import random
 import requests
 import urllib3
+from datetime import datetime
 from docopt import docopt
 from bs4 import BeautifulSoup
 from .exceptions import InvalidHoroscope
@@ -53,42 +56,66 @@ signs = [
     'pisces'
 ]
 
-# Horoscope sites [Get a random site (?)]
-horoscope_site = 'https://astrology.com/horoscope/daily/{day}/{sign}.html'
 
-def print_horoscope(horoscope, text):
+def print_horoscope(horoscope, text, day='today'):
     format = """
-    {horoscope}
+    {horoscope} ({date})
         {text}
     """
 
-    print(format.format(horoscope=horoscope.capitalize(), text=text))
+    print(format.format(horoscope=horoscope.capitalize(), text=text, date=day))
 
 def get_horoscope(sign, day='today'):
-    horoscope_soup = BeautifulSoup(fetch_request(horoscope_site.format(day=day, sign=sign)).text, 'lxml')
-    horoscope = horoscope_soup.find('div', {'class': 'daily-horoscope'}).find('p').text
 
-    return horoscope
+    def _astrology(sign=sign, day=day):
+        site = 'https://astrology.com/horoscope/daily/{day}/{sign}.html'.format(sign=sign, day=day)
+        h_soup = BeautifulSoup(fetch_request(site).text, 'lxml')
+        horoscope = h_soup.find('div', {'class': 'daily-horoscope'}).find('p').text
+
+        return horoscope
+
+    def _ganeshaspeaks(sign=sign, day=day):
+        day = 'daily' if day == 'today' else day
+        site = 'https://www.ganeshaspeaks.com/horoscopes/{day}-horoscope/{sign}/'.format(sign=sign, day=day)
+        h_soup = BeautifulSoup(fetch_request(site).text, 'lxml')
+        horoscope = h_soup.find('div', {'id': 'daily'}).find('div', {'class': 'row margin-bottom-0'}).find('p').text
+
+        # TODO(yujinyuz): replace Ganesha with a funny name before returning the findings.
+
+        return horoscope
+
+    def _random_horoscope_findings(horoscope_sites=['astrology', 'ganeshaspeaks']):
+        rand_choice = random.choice(horoscope_sites)
+        random_site = horoscope_site_mapping[rand_choice]
+        return random_site(), rand_choice
+
+    horoscope_site_mapping = {
+        'astrology': _astrology,
+        'ganeshaspeaks': _ganeshaspeaks,
+    }
+
+    horoscope_findings, weird_person = _random_horoscope_findings()
+
+    return horoscope_findings, weird_person
 
 def fetch_request(url):
     return requests.get(url, verify=False)
 
 def main():
     args = docopt(__doc__)
-
     sign = args.get('<sign>')
-
-    if sign not in signs:
-        raise InvalidHoroscope
-
     day = 'today'
+
     if args.get('--yesterday'):
         day = 'yesterday'
     if args.get('--tomorrow'):
         day = 'tomorrow'
+    if sign not in signs:
+        raise InvalidHoroscope
 
-    horoscope = get_horoscope(sign, day)
-    print_horoscope(sign, horoscope)
+    horoscope, person = get_horoscope(sign, day)
+    print("From: {}".format(person))
+    print_horoscope(sign, horoscope, day)
 
 if __name__ == '__main__':
     main()
