@@ -2,6 +2,11 @@
 History
 =======
 
+0.1.2dev1 (20217-10-23)
+-----------------------
+* Added funny name for fortune telling!
+* Bump for dev version.
+
 0.1.2beta1 (2017-10-22)
 -----------------------
 * Choose a random site then display the horoscope given by that site.
