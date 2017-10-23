@@ -24,6 +24,14 @@ A python horoscope fortune teller made for fun.
 * Free software: MIT license
 * Documentation: https://pytuneteller.readthedocs.io.
 
+Summary
+-------
+It's supposed to tell your fortune for today (or maybe for a specific date).
+It should also tell something like "A(n) `<adjective>` or `<verb>` `<noun>` has foreseen your future." or something funny.
+
+For example: ::
+
+    A talking pineapple has foreseen your future: <horoscope goes here>.
 
 Features
 --------
