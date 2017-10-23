@@ -2,6 +2,10 @@
 History
 =======
 
+0.1.3rc1 (20217-10-24)
+-----------------------
+* Fixed a bug when text files are not found.
+
 0.1.2dev1 (20217-10-23)
 -----------------------
 * Added funny name for fortune telling!

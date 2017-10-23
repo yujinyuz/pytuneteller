@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """The setup script."""
-
+import os
 from setuptools import setup, find_packages
 
 with open('README.rst') as readme_file:
@@ -30,7 +30,7 @@ test_requirements = [
 
 setup(
     name='pytuneteller',
-    version='0.1.2dev1',
+    version='0.1.3rc1',
     description="A python horoscope fortune teller made for fun.",
     long_description=readme + '\n\n' + history,
     author="Eugene Essun Oliveros",
@@ -38,7 +38,7 @@ setup(
     url='https://github.com/yujinyuz/pytuneteller',
     packages=find_packages(include=['pytuneteller']),
     package_data = {
-        'words': ['adjectives.txt', 'verbs.txt', 'nouns.txt'],
+        'pytuneteller': [os.path.join('words', 'adjectives.txt'), os.path.join('words', 'nouns.txt')],
     },
     entry_points={
         'console_scripts': ['pytuneteller = pytuneteller:main'],
