@@ -30,13 +30,16 @@ test_requirements = [
 
 setup(
     name='pytuneteller',
-    version='0.1.2beta1',
+    version='0.1.2dev1',
     description="A python horoscope fortune teller made for fun.",
     long_description=readme + '\n\n' + history,
     author="Eugene Essun Oliveros",
     author_email='jinyuzprodigy@gmail.com',
     url='https://github.com/yujinyuz/pytuneteller',
     packages=find_packages(include=['pytuneteller']),
+    package_data = {
+        'words': ['adjectives.txt', 'verbs.txt', 'nouns.txt'],
+    },
     entry_points={
         'console_scripts': ['pytuneteller = pytuneteller:main'],
     },
@@ -59,4 +62,5 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     setup_requires=setup_requirements,
+    python_requires='>=3',
 )
