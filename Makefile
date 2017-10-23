@@ -51,7 +51,7 @@ lint: ## check style with flake8
 	flake8 pytuneteller tests
 
 test: ## run tests quickly with the default Python
-	
+
 		python setup.py test
 
 test-all: ## run tests on every Python version with tox
@@ -75,8 +75,7 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: clean ## package and upload a release
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	twine -s upload dist/*
 
 dist: clean ## builds source and wheel package
 	python setup.py sdist
