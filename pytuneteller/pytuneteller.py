@@ -4,9 +4,10 @@
 
 Usage:
     pytuneteller (-h | --help)
-    pytuneteller horoscope --all [(--yesterday | --today | --tomorrow)]
-    pytuneteller horoscope [<sign>]
-    pytuneteller horoscope [<sign> (--yesterday | --today | --tomorrow)]
+    pytuneteller --version
+    pytuneteller [horoscopes] [(--yesterday | --today | --tomorrow)]
+    pytuneteller [horoscope] [<sign>]
+    pytuneteller [horoscope] [<sign> (--yesterday | --today | --tomorrow)]
 
 
 Options:
@@ -21,7 +22,8 @@ Options:
                             [default: False]
 
 Examples:
-    pytuneteller horoscope --all
+    pytuneteller horoscopes
+    pytuneteller horoscopes --yesterday
     pytuneteller horoscope virgo --today
     pytuneteller horoscope pisces --yesterday
 """
@@ -35,6 +37,7 @@ import urllib3
 
 from .exceptions import InvalidHoroscope
 from .utils import generate_funny_name
+from .version import get_version
 
 from datetime import datetime
 
@@ -61,17 +64,20 @@ signs = [
     'pisces'
 ]
 
+supported_sites = ['astrology', 'ganeshaspeaks']
 
-def print_horoscope(horoscope, text, day='today', name=None):
+def print_horoscope(sign, text, day='today', name=None):
 
     name = name if name else generate_funny_name()
 
     format = """
+{lines}
     A fortune has been casted upon you by a {name}!!!
-    {horoscope} ({date})
+    {sign} ({date})
         {text}
+{lines}
     """
-    print(format.format(horoscope=horoscope.capitalize(), text=text, date=day, name=name))
+    print(format.format(sign=sign.capitalize(), text=text, date=day, name=name, lines="="*79))
 
 def get_horoscope(sign, day='today'):
 
@@ -91,7 +97,7 @@ def get_horoscope(sign, day='today'):
 
         return horoscope
 
-    def _random_horoscope_findings(horoscope_sites=['astrology', 'ganeshaspeaks']):
+    def _random_horoscope_findings(horoscope_sites=supported_sites):
         rand_choice = random.choice(horoscope_sites)
         random_site = horoscope_site_mapping[rand_choice]
         return random_site()
@@ -105,25 +111,44 @@ def get_horoscope(sign, day='today'):
 
     return horoscope_findings
 
+def all_horoscope(day='today'):
+    horoscopes = {}
+    print("Fetching all horoscopes...")
+    for sign in signs:
+        print("Chanting spells to foresee the future of {sign}.".format(sign=sign.capitalize()))
+        horoscope = get_horoscope(sign, day)
+        horoscopes[sign] = horoscope
+
+    return horoscopes
+
 
 def fetch_request(url):
     return requests.get(url, verify=False)
 
 
 def main():
-    args = docopt(__doc__)
-    sign = args.get('<sign>')
+    args = docopt(__doc__, version=get_version(), options_first=False)
+    sign = args.get('<sign>').lower() if args.get('<sign>') else ""
     day = 'today'
+    single_horoscope = args.get('horoscope')
+    all_horoscopes = args.get('horoscopes')
 
     if args.get('--yesterday'):
         day = 'yesterday'
     if args.get('--tomorrow'):
         day = 'tomorrow'
-    if sign not in signs:
+
+    if sign not in signs and not all:
         raise InvalidHoroscope
 
-    horoscope = get_horoscope(sign, day)
-    print_horoscope(sign, horoscope, day)
+    if single_horoscope:
+        horoscope = get_horoscope(sign, day)
+        print_horoscope(sign, horoscope, day)
+
+    if all_horoscopes:
+        horoscopes = all_horoscope(day)
+        for sign, horoscope in horoscopes.items():
+            print_horoscope(sign, horoscope, day)
 
 
 if __name__ == '__main__':
