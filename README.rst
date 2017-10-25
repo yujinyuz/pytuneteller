@@ -13,8 +13,8 @@ Pytuneteller
         :target: http://pytuneteller.readthedocs.io/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/yujinyuz/pytuneteller/shield.svg
-     :target: https://pyup.io/repos/github/yujinyuz/pytuneteller/
+.. image:: https://pyup.io/repos/github/YujinYuz/pytuneteller/shield.svg
+     :target: https://pyup.io/repos/github/YujinYuz/pytuneteller/
      :alt: Updates
 
 
