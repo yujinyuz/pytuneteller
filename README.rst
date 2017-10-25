@@ -10,7 +10,7 @@ Pytuneteller
         :target: https://travis-ci.org/yujinyuz/pytuneteller
 
 .. image:: https://readthedocs.org/projects/pytuneteller/badge/?version=latest
-        :target: https://pytuneteller.readthedocs.io/en/latest/?badge=latest
+        :target: http://pytuneteller.readthedocs.io/?badge=latest
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/yujinyuz/pytuneteller/shield.svg
