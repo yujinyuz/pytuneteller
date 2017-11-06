@@ -2,6 +2,11 @@
 History
 =======
 
+0.1.3 (2017-11-06)
+------------------
+* First stable release!! Hooray for myself :D
+* Added <horoscopes> to fetch all horoscopes fortune.
+
 0.1.3rc1 (20217-10-24)
 -----------------------
 * Fixed a bug when text files are not found.
