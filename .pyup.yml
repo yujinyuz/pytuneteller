@@ -1,0 +1,5 @@
+# update schedule
+# default: empty
+# allowed: "every day", "every week", ...
+schedule: "every two weeks on monday"
+
