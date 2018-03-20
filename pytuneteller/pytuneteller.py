@@ -37,6 +37,7 @@ import urllib3
 
 from pytuneteller.exceptions import InvalidHoroscope
 from pytuneteller.utils import generate_funny_name
+from pytuneteller.utils import horoscope_signs as signs
 from pytuneteller.version import get_version
 
 from datetime import datetime
@@ -48,22 +49,6 @@ from bs4 import BeautifulSoup
 urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
 logger = logging.getLogger(__name__)
 
-# Valid horoscope signs
-# (TODO): move to utils?
-signs = {
-    'aries': '\U00002648',
-    'taurus': '\U00002649',
-    'gemini': '\U0000264A',
-    'cancer': '\U0000264B',
-    'leo': '\U0000264C',
-    'virgo': '\U0000264D',
-    'libra': '\U0000264E',
-    'scorpio': '\U0000264F',
-    'sagittarius': '\U00002650',
-    'capricorn': '\U00002651',
-    'aquarius': '\U00002652',
-    'pisces': '\U00002653'
-}
 
 supported_sites = ['astrology', 'ganeshaspeaks']
 funny_name = ""
@@ -72,7 +57,7 @@ def print_horoscope(sign, text, day='today', emoji='\U0001F608'):
     format = """
 {lines}
     A fortune has been casted upon you by a {name} {emoji}
-    {sign} {sign_icon}  ({date})
+    {sign} {sign_icon} ({date})
         {text}
 {lines}
     """

@@ -1,7 +1,24 @@
 import random
 import os
 
+from collections import namedtuple
+
 BASE_DIR = os.path.dirname(__file__)
+
+horoscope_signs = {
+    'aries': '\U00002648',
+    'taurus': '\U00002649',
+    'gemini': '\U0000264A',
+    'cancer': '\U0000264B',
+    'leo': '\U0000264C',
+    'virgo': '\U0000264D',
+    'libra': '\U0000264E',
+    'scorpio': '\U0000264F',
+    'sagittarius': '\U00002650',
+    'capricorn': '\U00002651',
+    'aquarius': '\U00002652',
+    'pisces': '\U00002653'
+}
 
 def generate_funny_name(adjectives=[], nouns=[]):
     if adjectives and nouns:
