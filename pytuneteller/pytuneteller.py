@@ -29,7 +29,6 @@ Examples:
 """
 
 
-import json
 import logging
 import random
 import requests
@@ -40,7 +39,6 @@ from pytuneteller.utils import generate_funny_name
 from pytuneteller.utils import horoscope_signs as signs
 from pytuneteller.version import get_version
 
-from datetime import datetime
 
 from docopt import docopt
 from bs4 import BeautifulSoup
@@ -53,6 +51,7 @@ logger = logging.getLogger(__name__)
 supported_sites = ['astrology', 'ganeshaspeaks']
 funny_name = ""
 
+
 def print_horoscope(sign, text, day='today', emoji='\U0001F608'):
     format = """
 {lines}
@@ -63,7 +62,8 @@ def print_horoscope(sign, text, day='today', emoji='\U0001F608'):
     """
     print(format.format(sign=sign.capitalize(), sign_icon=signs[sign], text=text, date=day.capitalize(), name=funny_name, emoji=emoji, lines='\U0000269A'*79))
 
-def get_horoscope(sign, day='today'):
+
+def get_horoscope(sign, day='today', site=None):
 
     def _astrology():
         site = 'https://astrology.com/horoscope/daily/{day}/{sign}.html'.format(sign=sign, day=day)
@@ -92,9 +92,13 @@ def get_horoscope(sign, day='today'):
         'ganeshaspeaks': _ganeshaspeaks,
     }
 
-    horoscope_findings = _random_horoscope_findings()
+    if not site:
+        horoscope_findings = _random_horoscope_findings()
+    else:
+        horoscope_findings = horoscope_site_mapping[site]()
 
     return horoscope_findings
+
 
 def _all_horoscope(day='today'):
     horoscopes = {}

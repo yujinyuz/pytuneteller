@@ -1,7 +1,7 @@
 import random
 import os
 
-from collections import namedtuple
+from pytuneteller.exceptions import InvalidType
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -20,17 +20,24 @@ horoscope_signs = {
     'pisces': '\U00002653'
 }
 
+
 def generate_funny_name(adjectives=[], nouns=[]):
-    if adjectives and nouns:
-        pass
+    """
+    Adjectives and Nouns should accept a list of words.
+    Returns a random generated name.
+    """
+
+    if not ((type(adjectives) is list) or (type(nouns) is list)):
+        raise InvalidType
 
     adjective_path = os.path.join(BASE_DIR, 'words', 'adjectives.txt')
     nouns_path = os.path.join(BASE_DIR, 'words', 'nouns.txt')
 
-    with open(adjective_path) as adjective_f, open(nouns_path) as nouns_f:
+    if not (adjectives and nouns):
+        with open(adjective_path) as adjective_f, open(nouns_path) as nouns_f:
 
-        adjectives = [adjective.strip('\n') for adjective in adjective_f]
-        nouns = [noun.strip('\n') for noun in nouns_f]
+            adjectives = [adjective.strip('\n') for adjective in adjective_f]
+            nouns = [noun.strip('\n') for noun in nouns_f]
 
     funny_name = "{adjective} {noun}".format(adjective=random.choice(adjectives), noun=random.choice(nouns))
 

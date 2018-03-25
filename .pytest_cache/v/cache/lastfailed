@@ -1,0 +1,3 @@
+{
+  "tests/test_pytuneteller.py::TestPytuneteller::test_main": true
+}
