@@ -1,6 +1,6 @@
 
 """
-    Hard code versions only!
+    Hard-coded versions only!
 """
 
 MAJOR_VERSION = "0"
