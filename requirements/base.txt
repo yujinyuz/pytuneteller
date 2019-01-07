@@ -2,4 +2,4 @@ beautifulsoup4==4.7.1
 docopt==0.6.2
 lxml==4.3.0
 requests==2.21.0
-twine==1.10.0
+twine==1.12.1
