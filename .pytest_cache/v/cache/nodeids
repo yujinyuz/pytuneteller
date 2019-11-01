@@ -1,6 +1,0 @@
-[
-  "tests/test_pytuneteller.py::TestPytuneteller::test_get_all_horoscopes",
-  "tests/test_pytuneteller.py::TestPytuneteller::test_get_horoscope",
-  "tests/test_pytuneteller.py::TestPytuneteller::test_print_horoscope",
-  "tests/test_pytuneteller_main.py::MainTest::test_main"
-]
