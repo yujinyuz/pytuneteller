@@ -2,8 +2,8 @@
 
 """Top-level package for Pytuneteller."""
 
-__author__ = """Eugene Essun Oliveros"""
-__email__ = 'jinyuzprodigy@gmail.com'
-__version__ = '0.1.1'
+__author__ = """Eugene Oliveros"""
+__email__ = 'eevoliveros@gmail.com'
+__version__ = '0.2.0'
 
 from .pytuneteller import *
