@@ -34,7 +34,7 @@ class BaseSite:
 
     @classmethod
     def get_horoscope(cls, sign, day='today'):
-        return cls.parse(sign=sign, day=day)
+        return f'Source [{cls.__name__}]: {cls.parse(sign=sign, day=day)}'
         # return cls.apply_custom_actions(lambda text: text.upper(), cls.parse(sign=sign))
 
 
@@ -67,7 +67,6 @@ class GaneshaSpeaks(BaseSite):
         day = 'daily' if day == 'today' else day
 
         response = cls._request(cls.url.format(day=day, sign=sign))
-        print(response.url)
         soup = BeautifulSoup(response.text, 'html.parser')
         horoscope = soup.find('div', {'id': 'daily'}).find(
             'div', {'class': 'row margin-bottom-0'}).find('p').text
@@ -125,7 +124,6 @@ class CafeAstrology(BaseSite):
 
         response = cls._request(cls.url.format(day=day, sign=sign))
         soup = BeautifulSoup(response.text, 'html.parser')
-        print(response.url)
         _img = soup.select_one('.wp-image-10891')
         horoscope = _img.parent.parent
         # _img.decompose()
