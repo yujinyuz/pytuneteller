@@ -43,9 +43,10 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '__pycache__' -exec rm -fr {} +
 
 clean-test: ## remove test and coverage artifacts
-	rm -fr .tox/
+	rm -fr .pytest_cache
+	rm -fr .tox
 	rm -f .coverage
-	rm -fr htmlcov/
+	rm -fr htmlcov
 
 lint: ## check style with flake8
 	flake8 pytuneteller tests
