@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 import random
-import requests
-import urllib3
-
 from pytuneteller.sites import Site
 
 
