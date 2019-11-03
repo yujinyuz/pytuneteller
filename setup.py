@@ -28,6 +28,7 @@ test_requirements = [
     'pytest',
     'tox',
     'flake8',
+    'vcrpy-unittest',
 ]
 
 setup(
