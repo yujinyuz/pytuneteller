@@ -134,7 +134,7 @@ class CafeAstrology(BaseSite):
 
     url = 'https://cafeastrology.com/{sign}dailyhoroscope{day}.html'
     day_mappings = {
-        'today': 'daily',
+        'today': '',
         'yesterday': 'y',
         'tomorrow': 'tom'
     }
@@ -162,6 +162,7 @@ class AstrologyZodiacSign(BaseSite):
     def parse(cls, **kwargs):
         sign = kwargs.get('sign')
         day = kwargs.get('day', 'daily')
+        day = 'daily' if day == 'today' else day
 
         response = cls._request(cls.url.format(day=day, sign=sign))
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -169,6 +170,7 @@ class AstrologyZodiacSign(BaseSite):
         class_selector = '.yesterdaysHoroscope' if day == 'yesterday' else '.dailyHoroscope'
         target = soup.select_one(class_selector)
         horoscope = []
+        print(response.url)
         for el in target.select('p'):
             horoscope.append(el.text)
 
