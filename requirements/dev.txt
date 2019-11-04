@@ -3,6 +3,5 @@ flake8
 coverage
 Sphinx
 twine
-pytest
 vcrpy-unittest
 -e .

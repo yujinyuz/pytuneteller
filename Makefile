@@ -51,7 +51,7 @@ lint: ## check style with flake8
 	flake8 pytuneteller tests
 
 test: ## run tests quickly with the default Python
-	coverage run --source="." -m pytest
+	coverage run --source="." -m pytest --vcr-record=none
 	coverage html
 
 coverage: ## check code coverage quickly with the default Python
