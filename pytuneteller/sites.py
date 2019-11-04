@@ -149,7 +149,6 @@ class CafeAstrology(BaseSite):
         response = cls._request(cls.url.format(day=day, sign=sign))
         soup = BeautifulSoup(response.text, 'html.parser')
         _img = soup.select_one('.wp-image-10891')
-        print(response.url)
         horoscope = _img.parent.parent
         # _img.decompose()
         return horoscope.text
@@ -170,7 +169,6 @@ class AstrologyZodiacSign(BaseSite):
         class_selector = '.yesterdaysHoroscope' if day == 'yesterday' else '.dailyHoroscope'
         target = soup.select_one(class_selector)
         horoscope = []
-        print(response.url)
         for el in target.select('p'):
             horoscope.append(el.text)
 
