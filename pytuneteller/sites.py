@@ -81,7 +81,18 @@ class Horoscope(BaseSite):
     @classmethod
     def parse(cls, **kwargs):
         sign_mappings = {
-            'virgo': 6
+            'aries': 1,
+            'taurus': 2,
+            'gemini': 3,
+            'cancer': 4,
+            'leo': 5,
+            'virgo': 6,
+            'libra': 7,
+            'scorpio': 8,
+            'sagittarius': 9,
+            'capricorn': 10,
+            'aquarius': 11,
+            'pisces': 12
         }
         sign = sign_mappings.get(kwargs.get('sign'))
         day = kwargs.get('day', 'today')
@@ -103,6 +114,14 @@ class Astrosage(BaseSite):
         sign = kwargs.get('sign')
         day = kwargs.get('day', 'daily')
         day = 'daily' if day == 'today' else day
+
+        if day == 'yesterday':
+            return "Could not get yesterday's horoscope"
+
+        if day == 'tomorrow':
+            sign = day
+            day = kwargs.get('sign')
+
         response = cls._request(cls.url.format(day=day, sign=sign))
         soup = BeautifulSoup(response.text, 'html.parser')
         horoscope = soup.select_one(
@@ -114,17 +133,23 @@ class Astrosage(BaseSite):
 class CafeAstrology(BaseSite):
 
     url = 'https://cafeastrology.com/{sign}dailyhoroscope{day}.html'
+    day_mappings = {
+        'today': 'daily',
+        'yesterday': 'y',
+        'tomorrow': 'tom'
+    }
 
     @classmethod
     def parse(cls, **kwargs):
         sign = kwargs.get('sign')
         day = kwargs.get('day', '')
 
-        day = '' if day == 'today' else day
+        day = cls.day_mappings[day]
 
         response = cls._request(cls.url.format(day=day, sign=sign))
         soup = BeautifulSoup(response.text, 'html.parser')
         _img = soup.select_one('.wp-image-10891')
+        print(response.url)
         horoscope = _img.parent.parent
         # _img.decompose()
         return horoscope.text
@@ -138,11 +163,11 @@ class AstrologyZodiacSign(BaseSite):
         sign = kwargs.get('sign')
         day = kwargs.get('day', 'daily')
 
-        day = 'daily' if day == 'today' else day
-
         response = cls._request(cls.url.format(day=day, sign=sign))
         soup = BeautifulSoup(response.text, 'html.parser')
-        target = soup.select_one('.dailyHoroscope')
+
+        class_selector = '.yesterdaysHoroscope' if day == 'yesterday' else '.dailyHoroscope'
+        target = soup.select_one(class_selector)
         horoscope = []
         for el in target.select('p'):
             horoscope.append(el.text)
