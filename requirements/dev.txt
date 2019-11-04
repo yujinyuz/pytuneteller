@@ -1,6 +1,5 @@
 -r base.txt
 flake8
-tox
 coverage
 Sphinx
 twine
