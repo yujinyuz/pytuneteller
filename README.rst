@@ -6,9 +6,6 @@ Pytuneteller
 .. image:: https://img.shields.io/pypi/v/pytuneteller.svg
         :target: https://pypi.python.org/pypi/pytuneteller
 
-.. image:: https://img.shields.io/travis/yujinyuz/pytuneteller.svg
-        :target: https://travis-ci.org/yujinyuz/pytuneteller
-
 .. image:: https://readthedocs.org/projects/pytuneteller/badge/?version=latest
         :target: http://pytuneteller.readthedocs.io/?badge=latest
         :alt: Documentation Status

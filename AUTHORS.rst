@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Eugene Essun Oliveros <jinyuzprodigy@gmail.com>
+* Eugene Essun Oliveros <eevoliveros@gmail.com>
 
 Contributors
 ------------

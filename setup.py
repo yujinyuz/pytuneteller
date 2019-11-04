@@ -17,7 +17,6 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'beautifulsoup4',
     'docopt',
-    'lxml',
     'requests',
 ]
 
@@ -26,9 +25,8 @@ setup_requirements = [
 ]
 
 test_requirements = [
-    'pytest',
-    'tox',
     'flake8',
+    'vcrpy-unittest',
 ]
 
 setup(
@@ -36,21 +34,21 @@ setup(
     version=get_version(),
     description="A python horoscope fortune teller made for fun.",
     long_description=readme + '\n\n' + history,
-    author="Eugene Essun Oliveros",
-    author_email='jinyuzprodigy@gmail.com',
+    author="Eugene Oliveros",
+    author_email='eevoliveros@gmail.com',
     url='https://github.com/yujinyuz/pytuneteller',
     packages=find_packages(include=['pytuneteller']),
-    package_data = {
+    package_data={
         'pytuneteller': [os.path.join('words', 'adjectives.txt'), os.path.join('words', 'nouns.txt')],
     },
     entry_points={
-        'console_scripts': ['pytuneteller = pytuneteller:main'],
+        'console_scripts': ['pytuneteller = pytuneteller.cli:main'],
     },
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='pytuneteller',
+    keywords='pytuneteller, horoscope, astrology, fun',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -58,9 +56,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
     tests_require=test_requirements,
