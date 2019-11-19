@@ -2,6 +2,6 @@
 flake8
 coverage
 Sphinx
-twine
+twine==3.0.0
 vcrpy-unittest
 -e .
