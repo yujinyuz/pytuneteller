@@ -1,6 +1,6 @@
 -r base.txt
 flake8
-coverage
+coverage==5.0.4
 Sphinx
 twine
 vcrpy-unittest
